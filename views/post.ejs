@@ -5,7 +5,7 @@
     <p><%-content.replace(/\n/g,"</br>")%></p>
     <form action="/postForm" method="post">
         <button formaction="/posts/<%=_id%>/edit" class="btn btn-primary" type="" name="postId" value="<%=_id%>">Edit</button>
-        <button formaction="/postDelete" class="btn btn-primary" type="" name="postId" value="<%=_id%>">Delete</button>
+        <!-- <button formaction="/postDelete" class="btn btn-primary" type="" name="postId" value="<%=_id%>">Delete</button> -->
     </form>
 
 <%- include("partials/footer"); -%>

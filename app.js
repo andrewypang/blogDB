@@ -87,16 +87,16 @@ app.post("/compose", function (req, res) {
 
 });
 
-app.post("/postDelete", function (req, res) {
-    const postId = req.body.postId;
+// app.post("/postDelete", function (req, res) {
+//     const postId = req.body.postId;
 
-    Post.findByIdAndRemove(postId, function (err) {
-        if (!err) {
-            console.log("Successfully deleted post.");
-            res.redirect("/");
-        }
-    });
-});
+//     Post.findByIdAndRemove(postId, function (err) {
+//         if (!err) {
+//             console.log("Successfully deleted post.");
+//             res.redirect("/");
+//         }
+//     });
+// });
 
 
 const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
