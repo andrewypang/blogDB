@@ -1,9 +1,11 @@
 <%- include("partials/header"); -%>
 
     <h1><%=title%></h1>
-    <p><%=content%></p>
-    <form action="/delete" method="post">
-        <button class="btn btn-primary" type="" name="postId" value="<%=_id%>">Delete</button>
+    <p><em><%=date.toLocaleDateString()+", "+weekday[date.getDay()]+" @ "+date.toLocaleTimeString()%></em></p>
+    <p><%-content.replace(/\n/g,"</br>")%></p>
+    <form action="/postForm" method="post">
+        <button formaction="/posts/<%=_id%>/edit" class="btn btn-primary" type="" name="postId" value="<%=_id%>">Edit</button>
+        <!-- <button formaction="/postDelete" class="btn btn-primary" type="" name="postId" value="<%=_id%>">Delete</button> -->
     </form>
 
 <%- include("partials/footer"); -%>
