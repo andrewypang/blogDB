@@ -9,7 +9,7 @@
 
         <div class="border border-primary">
     
-            <h1><%=post.title%></h1>
+            <h3><%=post.title%></h3>
             <p><em><%=post.date.toLocaleDateString()+", "+weekday[post.date.getDay()]+" @ "+post.date.toLocaleTimeString()%></em></p>
             
             <% if(post.content.length > 100){  %>

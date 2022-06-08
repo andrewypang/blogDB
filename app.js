@@ -39,11 +39,16 @@ const Post = mongoose.model("Post", postSchema);
 app.get("/", function (req, res) {
 
     Post.find({}, function (err, posts) {
+
+        const sortedPosts = posts.sort(function (a, b) {
+            return b.date - a.date;
+        });
+
+
         res.render("home", {
             startingContent: homeStartingContent,
-            posts: posts,
+            posts: sortedPosts,
             weekday: weekday
-
         });
 
     })
