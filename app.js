@@ -6,8 +6,12 @@ const ejs = require("ejs");
 const _ = require("lodash");
 const mongoose = require('mongoose');
 
+// Use the const ONLINE to switch between online workflow and offline workflow. 
+//      Offline workflow will include additional features such as deleting post. 
+//      Remember to switch ONLINE to true before uploading to heroku.
+const ONLINE = true;
 
-const homeStartingContent = "Greetings, Springfield! Welcome to the Springfield Town Square open forum. It is with great pride that I place the safety of our city in the hands of the first four people who showed up. Post your comments about whatever and I will definelty look at them. - Major Quimby";
+const homeStartingContent = "Greetings, Springfield! Welcome to the Springfield Town Square open forum. It is with great pride that I place the safety of our city in the hands of the first four people who showed up. - Major Quimby";
 const characters = ["Local Springfieldian",
     "Homer Simpson", "Marge Simpson", "Bart Simpson",
     "Lisa Simpson", "Otto Mann", "Apu Nahasapeemapetilon",
@@ -25,11 +29,13 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
-// let posts = [];
+
+// Select local DB or online DB
+// mongoose.connect("mongodb://localhost:27017/blogDB");
 mongoose.connect("mongodb+srv://admin-andrew:H6ik4i4PJaFKnLIm@cluster0.nhwux.mongodb.net/blogDB", {
     useNewUrlParser: true
 });
-// mongoose.connect("mongodb://localhost:27017/blogDB");
+
 
 const postSchema = {
     title: {
@@ -119,7 +125,6 @@ app.post("/postDelete", function (req, res) {
     });
 });
 
-
 const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 app.get("/posts/:postId", function (req, res) {
     const requestedPostId = req.params.postId;
@@ -134,7 +139,8 @@ app.get("/posts/:postId", function (req, res) {
             author: post.author,
             content: post.content,
             date: post.date,
-            weekday: weekday
+            weekday: weekday,
+            ONLINE: ONLINE
         });
     });
 
