@@ -1,11 +1,29 @@
 <%- include("partials/header"); -%>
 
-    <h1><%=title%></h1>
-    <p><em><%=date.toLocaleDateString()+", "+weekday[date.getDay()]+" @ "+date.toLocaleTimeString()%></em></p>
-    <p><%-content.replace(/\n/g,"</br>")%></p>
-    <form action="/postForm" method="post">
-        <button formaction="/posts/<%=_id%>/edit" class="btn btn-primary" type="" name="postId" value="<%=_id%>">Edit</button>
-        <!-- <button formaction="/postDelete" class="btn btn-primary" type="" name="postId" value="<%=_id%>">Delete</button> -->
-    </form>
+    <main class="container" style="padding-bottom: 8rem;">
+
+        <div class="row g-0 border rounded overflow-hidden flex-md-row my-3 shadow-sm position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0 fs-5"><%=title%></h3>
+                <div class="my-1 text-muted"><%=date.toLocaleDateString()+", "+weekday[date.getDay()]+" @ "+date.toLocaleTimeString()%></br>by <%=author%></div>
+                
+                <p class="card-text mb-auto fs-6"> <%- content.replace(/\n/g,"</br>")  %> </p>
+                        
+
+            </div>
+
+
+        </div>
+
+        <form action="/postForm" method="post">
+            <button formaction="/posts/<%=_id%>/edit" class="btn btn-outline-secondary" type="" name="postId" value="<%=_id%>">Edit</button>
+            <button formaction="/postDelete" class="btn btn-outline-secondary" type="" name="postId" value="<%=_id%>">Delete</button>
+    
+        </form>
+
+    </main>
+
+<%- include("partials/footer"); -%>
+
 
 <%- include("partials/footer"); -%>

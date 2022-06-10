@@ -7,7 +7,14 @@ const _ = require("lodash");
 const mongoose = require('mongoose');
 
 
-const homeStartingContent = "Welcome to the Open Forum. All post shared here will be beamed to the UFOs. They are watching.";
+const homeStartingContent = "Greetings, Springfield! Welcome to the Springfield Town Square open forum. It is with great pride that I place the safety of our city in the hands of the first four people who showed up. Post your comments about whatever and I will definelty look at them. - Major Quimby";
+const characters = ["Local Springfieldian",
+    "Homer Simpson", "Marge Simpson", "Bart Simpson",
+    "Lisa Simpson", "Otto Mann", "Apu Nahasapeemapetilon",
+    "Chief Clancy Wiggum", "Milhouse Van Houten", "Moe Szyslak",
+    "Mr. Burns", "Ned Flanders"
+];
+
 
 const app = express();
 
@@ -25,11 +32,21 @@ mongoose.connect("mongodb+srv://admin-andrew:H6ik4i4PJaFKnLIm@cluster0.nhwux.mon
 // mongoose.connect("mongodb://localhost:27017/blogDB");
 
 const postSchema = {
-    title: String,
+    title: {
+        type: String,
+        trim: true,
+        maxLength: [32, 'Title is too long']
+    },
     content: String,
     date: {
         type: Date,
         default: Date.now
+    },
+    author: {
+        type: String,
+        default: characters[0],
+        trim: true,
+        maxLength: [32, 'Author name is too long']
     }
 };
 
@@ -67,15 +84,19 @@ app.get("/contact", function (req, res) {
 });
 
 app.get("/compose", function (req, res) {
-    res.render("compose");
+    res.render("compose", {
+        characters: characters
+    });
 });
 
 app.post("/compose", function (req, res) {
 
     const post = new Post({
         title: req.body.postTitle,
-        content: req.body.postBody
+        content: req.body.postBody,
+        author: req.body.postAuthor
     });
+
 
     post.save(function (err) {
 
@@ -87,16 +108,16 @@ app.post("/compose", function (req, res) {
 
 });
 
-// app.post("/postDelete", function (req, res) {
-//     const postId = req.body.postId;
+app.post("/postDelete", function (req, res) {
+    const postId = req.body.postId;
 
-//     Post.findByIdAndRemove(postId, function (err) {
-//         if (!err) {
-//             console.log("Successfully deleted post.");
-//             res.redirect("/");
-//         }
-//     });
-// });
+    Post.findByIdAndRemove(postId, function (err) {
+        if (!err) {
+            console.log("Successfully deleted post.");
+            res.redirect("/");
+        }
+    });
+});
 
 
 const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -110,6 +131,7 @@ app.get("/posts/:postId", function (req, res) {
         res.render("post", {
             _id: requestedPostId,
             title: post.title,
+            author: post.author,
             content: post.content,
             date: post.date,
             weekday: weekday

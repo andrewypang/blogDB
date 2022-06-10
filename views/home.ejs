@@ -1,32 +1,46 @@
-
 <%- include("partials/header"); -%>
-    <h1>Home</h1>
-    <p> <%= startingContent %> </p>
 
 
+    <main class="container" style="padding-bottom: 8rem;">
 
-    <%  posts.forEach(function(post){ %>
+          <div class="row p-4 p-md-5 my-4 card bg-dark text-white" style="min-height: 16rem;">
+            <img src="/img/springfieldTownHall.webp" class="card-img" alt="" style="max-height: 16rem;object-fit: cover;filter: brightness(70%);">
+            <div class="card-img-overlay">
+                <div class="p-4 p-md-5 mb-4 col-md-8 px-0 position-absolute top-50 translate-middle-y">
+                    <h5 class="display-4 fst-italic card-title fs-2">Springfield Town Square</h5>
+                    <p class="lead my-3 card-text fs-6"><%= startingContent %></p>
+      
+                </div>
+            </div>
+          </div>
 
-        <div class="border border-primary">
-    
-            <h3><%=post.title%></h3>
-            <p><em><%=post.date.toLocaleDateString()+", "+weekday[post.date.getDay()]+" @ "+post.date.toLocaleTimeString()%></em></p>
-            
-            <% if(post.content.length > 100){  %>
-                <p> <%- post.content.substring(0, 100).replace(/\n/g,"</br>") + " ..." %> </p>
-            <% } else {  %>
-                <p> <%- post.content.replace(/\n/g,"</br>")  %> </p>
-                <% }  %>
-                    
-            <p>
-            <a href="/posts/<%=post._id%>">Read More</a>
-            </p>
+        <div class="row row-cols-md-3 my-2">
+            <%  posts.forEach(function(post){ %>
 
+            <div class="col">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="mb-0 fs-5"><%=post.title%></h3>
+                        <div class="my-1 text-muted"><%=post.date.toLocaleDateString()+", "+weekday[post.date.getDay()]+" @ "+post.date.toLocaleTimeString()%></br>by <%=post.author%></div>
+                        <% if(post.content.length > 100){  %>
+                            <p class="card-text mb-auto fs-6 overflow-hidden" style="height: 6rem;"> <%- post.content.substring(0, 100).replace(/\n/g,"</br>") + " ..." %> </p>
+                        <% } else {  %>
+                            <p class="card-text mb-auto fs-6 overflow-hidden" style="height: 6rem;"> <%- post.content.replace(/\n/g,"</br>")  %> </p>
+                            <% }  %>
+                                
+                        <p class="my-1">
+                        <a href="/posts/<%=post._id%>" class="btn btn-outline-secondary">View</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <% }) %>
+
+            </div>
         </div>
 
-    <% }) %>
-
-
-
+    </main>
 
 <%- include("partials/footer"); -%>

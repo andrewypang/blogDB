@@ -1,14 +1,23 @@
 
 <%- include("partials/header"); -%>
-<h1>Edit Post</h1>
-<form class="" action="/posts/<%=_id%>/save" method="post">
-  <div class="form-group">
-    <label>Title</label>
-    <input class="form-control" type="text" name="postTitle" value="<%=title%>">
-    <label>Post</label>
-    <textarea class="form-control" name="postBody" rows="10" cols="30"><%=content%></textarea>
-  </div>
-  <button class="btn btn-primary" type="submit" name="button">Update Post</button>
-</form>
+
+<main class="container">
+
+    <form class="" action="/posts/<%=_id%>/save" method="post">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" name="postTitle" value="<%=title%>">
+            <label for="floatingInput">Title</label>
+          </div>
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="" id="floatingTextarea2" style="height: 12rem" name="postBody"><%=content%></textarea>
+            <label for="floatingTextarea2">Leave a comment here</label>
+          </div>
+        <button type="submit" class="btn btn-outline-secondary my-3">Save</button>
+
+    </form>
+
+
+</main>
+
 
 <%- include("partials/footer"); -%>
