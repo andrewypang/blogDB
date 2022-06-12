@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 // Use the const ONLINE to switch between online workflow and offline workflow. 
 //      Offline workflow will include additional features such as deleting post. 
@@ -31,8 +32,7 @@ app.use(express.static("public"));
 
 
 // Select local DB or online DB
-// mongoose.connect("mongodb://localhost:27017/blogDB");
-mongoose.connect("mongodb+srv://admin-andrew:H6ik4i4PJaFKnLIm@cluster0.nhwux.mongodb.net/blogDB", {
+mongoose.connect(process.env.MONGODB_LIVE, {
     useNewUrlParser: true
 });
 
@@ -41,7 +41,7 @@ const postSchema = {
     title: {
         type: String,
         trim: true,
-        maxLength: [32, 'Title is too long']
+        maxLength: [64, 'Title is too long']
     },
     content: String,
     date: {
