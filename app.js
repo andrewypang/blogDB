@@ -32,7 +32,7 @@ app.use(express.static("public"));
 
 
 // Select local DB or online DB
-mongoose.connect(process.env.MONGODB_LOCAL, {
+mongoose.connect(process.env.MONGODB_LIVE, {
     useNewUrlParser: true
 });
 
