@@ -32,7 +32,7 @@ app.use(express.static("public"));
 
 
 // Select local DB or online DB
-mongoose.connect(process.env.MONGODB_LIVE, {
+mongoose.connect(process.env.MONGODB_LOCAL, {
     useNewUrlParser: true
 });
 
@@ -164,41 +164,28 @@ app.post("/posts/:postId/edit", function (req, res) {
 app.post("/posts/:postId/save", function (req, res) {
     const requestedPostId = req.params.postId;
 
-    Post.updateOne({
-        _id: requestedPostId
-    }, {
-        title: req.body.postTitle,
-        content: req.body.postBody
-    }, function (err) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("Post was successfully updated.")
-        }
-    });
+    if (req.body.postTitle.length == 0 || req.body.postBody.length == 0) {
+        res.redirect("/posts/" + requestedPostId);
+    } else {
+        Post.updateOne({
+            _id: requestedPostId
+        }, {
+            title: req.body.postTitle,
+            content: req.body.postBody
+        }, function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("Post was successfully updated.")
+            }
+        });
 
-    res.redirect("/posts/" + requestedPostId);
+        res.redirect("/posts/" + requestedPostId);
+
+    }
+
 });
 
-
-
-// This post will take the editted post and save to db
-// app.post("/editPost", function (req, res) {
-
-//     const post = new Post({
-//         title: req.body.postTitle,
-//         content: req.body.postBody
-//     });
-
-//     post.save(function (err) {
-
-//         if (!err) {
-//             res.redirect("/");
-//         }
-//     });
-
-
-// });
 
 let port = process.env.PORT;
 if (port == null || port == "") {
