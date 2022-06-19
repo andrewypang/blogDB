@@ -7,6 +7,8 @@ What things I learned and some tools used:
 2) [MongoDB](https://www.mongodb.com) & [MongoDB Altas](https://www.mongodb.com/atlas)
 3) [Node.js](https://nodejs.org)
 4) [Mongoose.js](https://mongoosejs.com/docs/guide.html)
+5) [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference)
+6) [EJS](https://ejs.co/#docs)
 
 ## Home
 <img src="img-home.png" width="720" height="auto">
@@ -42,4 +44,5 @@ Express.js Hello World Example
       console.log(`Example app listening on port ${port}`)
 
     })
+  
 </code>
