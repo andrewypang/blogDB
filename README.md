@@ -9,25 +9,29 @@ What things I learned and some tools used:
 4) [Mongoose.js](https://mongoosejs.com/docs/guide.html)
 
 ## Home
-<img src="img-home.png" width="300" height="auto">
+<img src="img-home.png" width="720" height="auto">
 
 ## Compose a Note
-![Compose a Note](img-compose.png)
+<img src="img-compose.png" width="720" height="auto">
+
 
 ## View and/or Edit Note
-![View/Edit Note](img-viewedit.png)
+<img src="img-viewedit.png" width="720" height="auto">
+
 
 
 Express.js Hello World Example
 
-` const express = require('express')
-const app = express()
-const port = 3000
+<code>
+  const express = require('express')
+  const app = express()
+  const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  app.get('/', (req, res) => {
+    res.send('Hello World!')
+  })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-}) `
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+  })
+</code>
