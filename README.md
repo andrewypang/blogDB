@@ -9,7 +9,7 @@ What things I learned and some tools used:
 4) [Mongoose.js](https://mongoosejs.com/docs/guide.html)
 
 ## Home
-![Home Page](img-home.png)
+<img src="img-home.png" width="300" height="auto">
 
 ## Compose a Note
 ![Compose a Note](img-compose.png)
